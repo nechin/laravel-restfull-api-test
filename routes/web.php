@@ -16,3 +16,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'customers'], function () use ($router) {
+    $router->get('/', ['uses' => 'CustomerController@all']);
+    $router->get('/{customerId}', ['uses' => 'CustomerController@get']);
+});
