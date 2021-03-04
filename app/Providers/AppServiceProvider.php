@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Entities\Customer;
 use App\Repositories\Contracts\BaseRepository;
 use App\Repositories\CustomerRepository;
+use App\Services\DataProvider\BaseProvider;
+use Exception;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,11 +19,19 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(BaseRepository::class, function($app) {
-            // This is what Doctrine's EntityRepository needs in its constructor.
             return new CustomerRepository(
                 $app['em'],
                 $app['em']->getClassMetaData(Customer::class)
             );
+        });
+
+        $this->app->bind(BaseProvider::class, function ($app) {
+            $class = config('services.provider');
+            if (empty($class)) {
+                throw new Exception('Wrong provider class name');
+            }
+
+            return new $class();
         });
     }
 }

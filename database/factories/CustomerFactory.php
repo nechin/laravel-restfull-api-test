@@ -1,35 +1,21 @@
 <?php
 
-namespace Database\Factories;
+/**
+ * @var $factory Factory
+ */
 
 use App\Entities\Customer;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use LaravelDoctrine\ORM\Testing\Factory;
 
-class CustomerFactory extends Factory
-{
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Customer::class;
-
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
-    {
-        return [
-            'id' => $this->faker->randomNumber(),
-            'fullName' => $this->faker->firstName,
-            'email' => $this->faker->unique()->safeEmail,
-            'country' => $this->faker->unique()->country,
-            'username' => $this->faker->userName,
-            'gender' => 'male',
-            'city' => $this->faker->unique()->city,
-            'phone' => $this->faker->unique()->phoneNumber,
-        ];
-    }
-}
+$factory->define(Customer::class, function(Faker\Generator $faker) {
+    return [
+        'id' => $faker->randomNumber(),
+        'fullName' => $faker->firstName,
+        'email' => $faker->unique()->safeEmail,
+        'country' => $faker->unique()->country,
+        'username' => $faker->userName,
+        'gender' => 'male',
+        'city' => $faker->unique()->city,
+        'phone' => $faker->unique()->phoneNumber,
+    ];
+});

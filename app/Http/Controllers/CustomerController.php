@@ -6,11 +6,11 @@ use App\Repositories\CustomerRepository;
 use App\Transformers\CustomerTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class CustomerController extends Controller
 {
-    private $customers;
+    private CustomerRepository $customers;
+    private CustomerTransformer $transformer;
 
     /**
      * CustomerController constructor.
@@ -19,32 +19,36 @@ class CustomerController extends Controller
     public function __construct(CustomerRepository $customers)
     {
         $this->customers = $customers;
+        $this->transformer = new CustomerTransformer();
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function all(): JsonResponse
     {
         $customers = $this->customers->findAll();
-        $transformer = new CustomerTransformer();
         return response()->json(
-            $transformer->transformAll($customers)
+            $this->transformer->transformAll($customers)
         );
     }
 
     /**
      * @param Request $request
+     * @param mixed $customerId
      * @return JsonResponse
-     * @throws ValidationException
      */
-    public function get(Request $request): JsonResponse
+    public function get(Request $request, $customerId): JsonResponse
     {
-        $this->validate($request, [
-            'customerId' => 'required|integer'
-        ]);
+        if (empty($customerId) || !is_numeric($customerId)) {
+            return response()->json(
+                ['error' => 'Wrong customerId'], 400
+            );
+        }
 
         $customer = $this->customers->find($request->get('customerId'));
-        $transformer = new CustomerTransformer();
         return response()->json(
-            $transformer->transform($customer)
+            $this->transformer->transform($customer)
         );
     }
 }

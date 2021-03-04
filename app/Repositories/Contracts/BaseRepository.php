@@ -4,6 +4,14 @@ namespace App\Repositories\Contracts;
 
 interface BaseRepository
 {
+    /**
+     * @param mixed $id
+     * @return object|null
+     */
     public function find($id);
-    public function findAll();
+
+    /**
+     * @return array
+     */
+    public function findAll(): array;
 }
