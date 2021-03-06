@@ -7,16 +7,16 @@ use App\Services\DataProvider\Contracts\Provider;
 class RandomUserProvider extends BaseProvider implements Provider
 {
     /**
-     * @param int $limit
+     * @param string $count
      * @return string
      */
-    public function getProviderUri(int $limit): string
+    public function getProviderUri(string $count): string
     {
-        return 'https://randomuser.me/api/?nat=AU&results=' . $limit;
+        return 'https://randomuser.me/api/?nat=AU&results=' . $count;
     }
 
     /**
-     * Scheme for mapping data from provider to db
+     * Scheme for mapping data from provider to db with dot notation
      *
      * @return array
      */

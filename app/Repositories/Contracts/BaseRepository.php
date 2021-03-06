@@ -13,5 +13,10 @@ interface BaseRepository
     /**
      * @return array
      */
-    public function findAll(): array;
+    public function findAll();
+
+    /**
+     * @param array $data
+     */
+    public function insertOrUpdateByEmail(array $data): void;
 }

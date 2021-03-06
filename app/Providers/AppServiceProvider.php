@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Entities\Customer;
 use App\Repositories\Contracts\BaseRepository;
 use App\Repositories\CustomerRepository;
+use App\Services\DataImporter\Contracts\Importer;
+use App\Services\DataImporter\DataImporter;
 use App\Services\DataProvider\BaseProvider;
 use Exception;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
                 $app['em']->getClassMetaData(Customer::class)
             );
         });
+
+        $this->app->bind(Importer::class, DataImporter::class);
 
         $this->app->bind(BaseProvider::class, function ($app) {
             $class = config('services.provider');

@@ -5,10 +5,10 @@ namespace App\Services\DataProvider\Contracts;
 interface Provider
 {
     /**
-     * @param int $limit
+     * @param string $count
      * @return string
      */
-    public function getProviderUri(int $limit): string;
+    public function getProviderUri(string $count): string;
 
     /**
      * @return array

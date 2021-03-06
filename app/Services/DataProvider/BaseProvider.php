@@ -7,10 +7,10 @@ use App\Services\DataProvider\Contracts\Provider;
 abstract class BaseProvider implements Provider
 {
     /**
-     * @param int $limit
+     * @param string $count
      * @return string
      */
-    abstract public function getProviderUri(int $limit): string;
+    abstract public function getProviderUri(string $count): string;
 
     /**
      * @return string[]

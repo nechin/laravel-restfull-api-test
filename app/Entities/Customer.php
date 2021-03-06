@@ -15,47 +15,47 @@ class Customer
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $firstName;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $lastName;
+    private $lastName;
+
+    /**
+     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $email;
+    private $country;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $country;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    private string $username;
+    private $username;
 
     /**
      * @ORM\Column(type="string", length=6)
      */
-    private string $gender;
+    private $gender;
 
     /**
      * @ORM\Column(type="string")
      */
-    private string $city;
+    private $city;
 
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private string $phone;
+    private $phone;
 
     /**
      * @return int

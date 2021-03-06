@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\DataImporter\DataImporter;
+use App\Services\DataImporter\Contracts\Importer;
 use Illuminate\Console\Command;
 
 class ImportData extends Command
@@ -12,7 +12,7 @@ class ImportData extends Command
      *
      * @var string
      */
-    protected $signature = 'importer:run {limit=100}';
+    protected $signature = 'importer:run {count=100}';
 
     /**
      * The console command description.
@@ -34,10 +34,11 @@ class ImportData extends Command
     /**
      * Execute the console command.
      *
-     * @param DataImporter $importer
+     * @param Importer $importer
      */
-    public function handle(DataImporter $importer)
+    public function handle(Importer $importer)
     {
-        $importer->run($this->argument('limit'));
+        $importer->setCount($this->argument('count'));
+        echo $importer->run();
     }
 }

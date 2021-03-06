@@ -5,7 +5,12 @@ namespace App\Services\DataImporter\Contracts;
 interface Importer
 {
     /**
-     * @param int $limit
+     * @param string $count
      */
-    public function run(int $limit): void;
+    public function setCount(string $count): void;
+
+    /**
+     * @return string
+     */
+    public function run(): string;
 }
