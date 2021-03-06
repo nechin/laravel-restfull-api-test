@@ -11,7 +11,7 @@ Lumen + doctrine orm restfull api test task
 2. Start web server
 3. Create and set connection to database
 4. Run command: **php artisan doctrine:schema:create**
-5. Import data by command **php artisan importer:run 100**
+5. Import data by command **php artisan importer:run {count}**
 6. Test this API by **GET** request to _**/customers**_ or _**/customers/{customerId}**_
 # Using
 You may add a new data provider to **_Services/DataProvider_** and set this provider in **_config/services.php_**
