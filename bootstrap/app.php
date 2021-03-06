@@ -27,8 +27,6 @@ $app->withFacades();
 
 // $app->withEloquent();
 
-class_alias('LaravelDoctrine\ORM\Facades\EntityManager', 'EntityManager');
-
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings

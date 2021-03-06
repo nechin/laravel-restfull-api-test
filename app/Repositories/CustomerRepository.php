@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Entities\Customer;
 use App\Repositories\Contracts\BaseRepository;
 use Doctrine\ORM\EntityRepository;
-use EntityManager;
+use LaravelDoctrine\ORM\Facades\EntityManager;
 
 class CustomerRepository extends EntityRepository implements BaseRepository
 {

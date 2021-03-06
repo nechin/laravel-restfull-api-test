@@ -39,15 +39,15 @@ class DataImporter implements Importer
      */
     public function run(): string
     {
-        $results = $this->getResults();
+        $results = $this->getDataFromProvider();
         $this->importResults($results);
         return $this->message;
     }
 
     /**
-     * @return array|string
+     * @return array
      */
-    private function getResults(): array
+    private function getDataFromProvider(): array
     {
         $uri = $this->dataProvider->getProviderUri($this->count);
         $response = Http::get($uri);

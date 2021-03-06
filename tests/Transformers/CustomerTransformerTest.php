@@ -19,7 +19,7 @@ class CustomerTransformerTest extends TestCase
         $transformer = new CustomerTransformer();
         $transformedData = $transformer->transformAll($customers);
         $this->assertIsArray($transformedData, 'Transformed data is not array');
-        $this->assertCount(4, $transformedData, 'Transformed result length is not a 4');
+        $this->assertCount(4, $transformedData, 'Transformed list result length is not a 4');
         $this->assertArrayHasKey('id', $transformedData[0], 'Customer data has no ID key');
         $this->assertArrayHasKey('fullName', $transformedData[0], 'Customer data has no fullName key');
         $this->assertArrayHasKey('email', $transformedData[0], 'Customer data has no email key');
@@ -32,6 +32,7 @@ class CustomerTransformerTest extends TestCase
         $transformer = new CustomerTransformer();
         $transformedData = $transformer->transform($customer);
         $this->assertArrayHasKey('id', $transformedData, 'Customer data has not ID key');
+        $this->assertCount(8, $transformedData, 'Transformed result length is not an 8');
         $this->assertIsNumeric($transformedData['id'], 'Customer ID is not a number');
         $this->assertArrayHasKey('fullName', $transformedData, 'Customer data has not fullName key');
         $this->assertArrayHasKey('email', $transformedData, 'Customer data has no email key');
