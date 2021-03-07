@@ -14,4 +14,9 @@ interface Provider
      * @return array
      */
     public function getFieldsMap(): array;
+
+    /**
+     * @return array
+     */
+    public function getFilters(): array;
 }

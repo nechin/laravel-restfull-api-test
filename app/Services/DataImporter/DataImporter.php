@@ -39,8 +39,8 @@ class DataImporter implements Importer
      */
     public function run(): string
     {
-        $results = $this->getDataFromProvider();
-        $this->importResults($results);
+        $data = $this->getDataFromProvider();
+        $this->importData($data);
         return $this->message;
     }
 
@@ -68,29 +68,47 @@ class DataImporter implements Importer
     }
 
     /**
-     * @param array $results
+     * @param array $dataList
      */
-    private function importResults(array $results): void
+    private function importData(array $dataList): void
     {
-        if (empty($results)) {
+        if (empty($dataList)) {
             return;
         }
 
         $fieldsMap = $this->dataProvider->getFieldsMap();
 
-        foreach ($results as $result) {
+        foreach ($dataList as $data) {
             $insertData = [
-                'firstName' => Arr::get($result, $fieldsMap['firstName']),
-                'lastName' => Arr::get($result, $fieldsMap['lastName']),
-                'email' => Arr::get($result, $fieldsMap['email']),
-                'country' => Arr::get($result, $fieldsMap['country']),
-                'username' => Arr::get($result, $fieldsMap['username']),
-                'gender' => Arr::get($result, $fieldsMap['gender']),
-                'city' => Arr::get($result, $fieldsMap['city']),
-                'phone' => Arr::get($result, $fieldsMap['phone']),
+                'firstName' => Arr::get($data, $fieldsMap['firstName']),
+                'lastName' => Arr::get($data, $fieldsMap['lastName']),
+                'email' => Arr::get($data, $fieldsMap['email']),
+                'country' => Arr::get($data, $fieldsMap['country']),
+                'username' => Arr::get($data, $fieldsMap['username']),
+                'gender' => Arr::get($data, $fieldsMap['gender']),
+                'city' => Arr::get($data, $fieldsMap['city']),
+                'phone' => Arr::get($data, $fieldsMap['phone']),
             ];
 
-            $this->repository->insertOrUpdateByEmail($insertData);
+            if ($this->isAvailableData($insertData)) {
+                $this->repository->insertOrUpdateByEmail($insertData);
+            }
         }
+    }
+
+    /**
+     * Check that filtered values not in $data array
+     *
+     * @param array $data
+     * @return bool
+     */
+    private function isAvailableData(array $data): bool
+    {
+        $filters = $this->dataProvider->getFilters();
+        if (empty($filters)) {
+            return true;
+        }
+
+        return count($filters) === count(array_diff_assoc($filters, $data));
     }
 }

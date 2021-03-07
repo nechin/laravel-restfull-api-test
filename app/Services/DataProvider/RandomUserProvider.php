@@ -29,4 +29,17 @@ class RandomUserProvider extends BaseProvider implements Provider
         $map['city'] = 'location.city';
         return $map;
     }
+
+    /**
+     * Returns an array of filters if the results cannot be filtered by parameters in the query
+     *
+     * @return array
+     */
+    public function getFilters(): array
+    {
+        return [
+            /*'city' => 'Bendigo',
+            'username' => 'batman',*/
+        ];
+    }
 }

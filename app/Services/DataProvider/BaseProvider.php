@@ -13,6 +13,12 @@ abstract class BaseProvider implements Provider
     abstract public function getProviderUri(string $count): string;
 
     /**
+     * Returns an array of filters if the results cannot be filtered by parameters in the query
+     * @return array
+     */
+    abstract public function getFilters(): array;
+
+    /**
      * @return string[]
      */
     public function getFieldsMap(): array
