@@ -1,5 +1,5 @@
 # Restfull api
-Lumen + Doctrine ORM restfull api test task
+Lumen + Doctrine ORM restfull api
 # Versions
 - `Lumen Framework 8.2.3`
 - `Laravel Doctrine ORM 1.7.4`
